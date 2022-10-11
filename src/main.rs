@@ -1,4 +1,4 @@
-use std::{io::stdin, f64::consts::PI};
+use std::{io::stdin, f64::consts::PI, fs::read};
 
 /*
 TODO:calc с 2 по 6, оптимизация
@@ -10,9 +10,9 @@ fn main() {
     let selection: f64 = read_var();
     if selection == 1.0 {
         calc1();
+    } else if selection == 2.0 {
+        calc2();
     }
-
-    
 }
 
 fn calc1 () {
@@ -23,10 +23,7 @@ fn calc1 () {
     let c: f64 = (a.powi(2) + b.powi(2)).sqrt();
     println!("{c}");
     
-    let alpha: f64 = rad2d((a/b).atan());
-    let beta: f64 = rad2d((b/a).atan());
-    println!("{alpha}");
-    println!("{beta}");
+    calc_angle(a, b);
 
     let h: f64 = (a*b)/c;
     println!("{h}");
@@ -36,6 +33,24 @@ fn calc1 () {
 
     let p: f64 = a + b + c;
     println!("{p}");
+}
+
+fn calc2() {
+    println!("Введите значение a и b");
+    let a: f64 = read_var();
+    let c: f64 = read_var();
+
+    let b: f64 = (c.powi(2) - a.powi(2)).sqrt();
+    println!("{b}");
+
+    calc_angle(a, b);
+}
+
+fn calc_angle(a:f64, b:f64) {
+    let alpha: f64 = rad2d((a/b).atan());
+    let beta: f64 = rad2d((b/a).atan());
+    println!("{alpha}");
+    println!("{beta}");
 }
 
 fn rad2d(rad: f64) -> f64 {
