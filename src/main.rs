@@ -24,6 +24,7 @@ fn main() {
         println!("Введено число не соответствующее множеству Q[1;6]");
         main();
     }
+    pause();
 }
 
 fn calc1() {
@@ -191,4 +192,10 @@ fn read_var() -> f64 {
         }; //преобразование ввода со string в float-point integer с перезапуском loop в случае ошибки
         break x;
     }
+}
+
+fn pause() { //фукция паузы
+    println!("нажмите Enter чтобы выйти.");
+    let mut q = String::new();
+    stdin().read_line(&mut q).expect("ошибка");
 }
