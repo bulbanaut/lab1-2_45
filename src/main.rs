@@ -2,28 +2,28 @@ use std::{io::stdin, f64::consts::PI};
 
 /*
 a, b, c - стороны треугольника; gamma - прямой угол; alpha, beta - острые углы (в радианах), h - высота опущенная на гипотенузу c; S - площадь; P - периметр
+Кирилл, если ты это читаешь - я заранее извиняюсь за дальнейший ужас
 */
 
 fn main() {
-    println!("Выберите при помощи каких переменных будут проводится вычисления: 1)a, b; 2)a, c; 3)a, h; 4)b, Альфа 5)h, Бета; 6)c, Бета");
-    let selection: f64 = read_var();
-    if selection == 1.0 {
-        calc1();
-    } else if selection == 2.0 {
-        calc2();
-    } else if selection == 3.0 {
-        calc3();
-    } else if selection == 4.0 {
-        calc4();
-    } else if selection == 5.0 {
-        calc5();
-    } else if selection == 6.0 {
-        calc6();
-    } else {
-        println!("Введено число не соответствующее множеству Q[1;6]");
-        main();
+    loop {
+        println!("Выберите при помощи каких переменных будут проводится вычисления: 1)a, b; 2)a, c; 3)a, h; 4)b, Альфа 5)h, Бета; 6)c, Бета");
+        let selection: f64 = read_var();
+        match selection as u8 {
+            1 => calc1(),
+            2 => calc2(),
+            3 => calc3(),
+            4 => calc4(),
+            5 => calc5(),
+            6 => calc6(),
+            _ => {
+                println!("Введено число не соответствующее множеству Q[1;6]");
+                continue; //перезапуск лупа
+            },
+        }
+        pause();
+        break;
     }
-    pause();
 }
 //функции с calc1 по calc6 занимаются вычислением и выводом переменных 
 fn calc1() {
@@ -149,8 +149,8 @@ fn calc_hypo(a:f64, b:f64) -> f64 {
 }
 
 fn calc_angle(a:f64, b:f64) {
-    let alpha: f64 = rad2d((a/b).atan());
-    let beta: f64 = rad2d((b/a).atan());
+    let alpha: f64 = (a/b).atan().to_degrees();
+    let beta: f64 = (b/a).atan().to_degrees();
     println!("Альфа: {alpha}");
     println!("Бета: {beta}");
 }
@@ -168,10 +168,6 @@ fn calc_h(a:f64, b:f64, c:f64) {
 fn calc_p(a:f64, b:f64, c:f64) {
     let p: f64 = a + b + c;
     println!("Периметр: {p}");
-}
-
-fn rad2d(rad: f64) -> f64 {
-    rad * (180.0/PI)
 }
 
 fn read_var() -> f64 {
